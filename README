@@ -1,0 +1,4 @@
+Copyright 2011 Kai Chang
+Released under MIT license
+
+Javascript math, based on (Mootools Array.Math)[http://mootools.net/forge/p/array_math] without extending native prototypes.
