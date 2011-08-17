@@ -24,7 +24,7 @@
   // Scale to max value
   // math.scale(1,[2,5,10])
   //   => [ 0.2, 0.5, 1]
-  math.scale = function(max, arr) {
+  math.scale = function(arr, max) {
     var max0 = _.max(arr);
     return _.map(arr, function(i) { return i * (max/max0); });
   };
@@ -52,5 +52,13 @@
     var sorted = math.sort(arr);
     return (sorted.length % 2) ? sorted[middle - 1] : (sorted[middle - 1.5] + sorted[middle - 0.5]) / 2;
   };
+
+  // math.variance([1,2,3])
+  //   => TODO
+  math.variance = function() {
+    // TODO
+  };
+
+  _.mixin(math);
 
 })();
