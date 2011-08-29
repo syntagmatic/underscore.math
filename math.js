@@ -55,8 +55,10 @@
 
   // math.variance([1,2,3])
   //   => TODO
-  math.variance = function() {
-    // TODO
+  math.variance = function(arr) {
+    // TODO TEST!
+    var mean = _(arr).mean();
+    return _(arr).chain.map(function(x) { return Math.pow((x-mean),2); }).mean().value();
   };
 
   // math.transpose(([1,2,3], [4,5,6], [7,8,9]])
