@@ -56,6 +56,7 @@
   
   // math.median([1,2,3,4])
   //   => 2.5
+  //   TODO Objects
   math.median = function(arr) {
     var middle = (arr.length + 1) /2;
     var sorted = math.sort(arr);
@@ -66,7 +67,7 @@
   //   => TODO
   math.variance = function(arr) {
     var mean = _(arr).mean();
-    return _(arr).chain.map(function(x) { return Math.pow((x-mean),2); }).mean().value();
+    return _(arr).chain().map(function(x) { return Math.pow((x-mean),2); }).mean().value();
   };
   
   // math.stdDeviation([1,2,3])
