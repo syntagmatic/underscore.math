@@ -7,11 +7,19 @@
   // Sum of array
   // math.sum([1,2,3])
   //   => 6
-  math.sum = function(arr) {
-    var sum = 0;
-    for (var i=0, len = arr.length; i<len; i++)
-      sum += arr[i];
-    return sum;
+  // math.sum([{b: 4},{b: 5},{b: 6}], 'b')                                              
+  //   => 15                                                                            
+  math.sum = function(obj, key) {                                                       
+    if (_.isArray(obj) && typeof obj[0] === 'number') {                                 
+      var arr = obj;                                                                    
+    } else {                                                                            
+      var key = key || 'value';                                                         
+      var arr = _(obj).pluck(key);                                                      
+    }                                                                                   
+    var val = 0;                                                                        
+    for (var i=0, len = arr.length; i<len; i++)                                         
+      val += arr[i];                                                                    
+    return val;                                                                         
   };
 
   // Arithmetic mean
