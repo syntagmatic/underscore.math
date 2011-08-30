@@ -41,6 +41,15 @@ test("Objects", function() {
   equal( _({one: {a:-Math.PI}, two: {a:1}}).mean('a'), (1-Math.PI)/2, "OVer values of an object with specified key" );
 });
 
+module("Scale");
+
+test("Arrays", function() {
+  expect(3);
+  deepEqual( _([1, 2, 5]).scale(1), [0.2, 0.4, 1], "Scale to 1" );
+  deepEqual( _([1, 2, 5]).scale(5), [1, 2, 5], "Scale to 5" );
+  deepEqual( _([1, 2, 5]).scale(0), [0.2, 0.4, 1], "Implied 1" );
+});
+
 module("Numeric Sort");
 
 test("Arrays", function() {

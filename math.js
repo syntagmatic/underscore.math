@@ -33,6 +33,7 @@
   // math.scale(1,[2,5,10])
   //   => [ 0.2, 0.5, 1]
   math.scale = function(arr, max) {
+    var max = max || 1;
     var max0 = _.max(arr);
     return _.map(arr, function(i) { return i * (max/max0); });
   };
@@ -44,7 +45,7 @@
     return (y[1] - x[1]) / (y[0]-x[0]);
   };
 
-  // Sort array by numbers
+  // Numeric sort
   // math.sort([3,1,2])
   //   => [1,2,3]
   math.sort = function(arr) {
