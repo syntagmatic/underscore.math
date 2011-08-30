@@ -7,26 +7,26 @@
   // Sum of array
   // math.sum([1,2,3])
   //   => 6
-  // math.sum([{b: 4},{b: 5},{b: 6}], 'b')                                              
-  //   => 15                                                                            
-  math.sum = function(obj, key) {                                                       
-    if (_.isArray(obj) && typeof obj[0] === 'number') {                                 
-      var arr = obj;                                                                    
-    } else {                                                                            
-      var key = key || 'value';                                                         
-      var arr = _(obj).pluck(key);                                                      
-    }                                                                                   
-    var val = 0;                                                                        
-    for (var i=0, len = arr.length; i<len; i++)                                         
-      val += arr[i];                                                                    
-    return val;                                                                         
+  // math.sum([{b: 4},{b: 5},{b: 6}], 'b')
+  //   => 15
+  math.sum = function(obj, key) {
+    if (_.isArray(obj) && typeof obj[0] === 'number') {
+      var arr = obj;
+    } else {
+      var key = key || 'value';
+      var arr = _(obj).pluck(key);
+    }
+    var val = 0;
+    for (var i=0, len = arr.length; i<len; i++)
+      val += arr[i];
+    return val;
   };
 
   // Arithmetic mean
   // math.mean([1,2,3])
   //   => 2
-  math.mean = function(arr) {
-    return math.sum(arr) / arr.length;
+  math.mean = function(obj, key) {
+    return math.sum(obj, key) / _(obj).size();
   };
 
   // Scale to max value
@@ -64,7 +64,6 @@
   // math.variance([1,2,3])
   //   => TODO
   math.variance = function(arr) {
-    // TODO TEST!
     var mean = _(arr).mean();
     return _(arr).chain.map(function(x) { return Math.pow((x-mean),2); }).mean().value();
   };
@@ -72,7 +71,6 @@
   // math.stdDeviation([1,2,3])
   //   => TODO
   math.stdDeviation = function(arr) {
-    // TODO TEST!
     return Math.sqrt(_(arr).variance());
   };
 

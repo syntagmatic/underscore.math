@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
+<script type="text/javascript" src="qunit.js"></script>
+<script src="underscore.js"></script>
+<script src="math.js"></script>
+
+  <script>
+  $(document).ready(function(){
+    
+module("Sum");
+
+test("Arrays", function() {
+  expect(3);
+  equal( _([1,2,3]).sum(), 6, "Easy" );
+  equal( Math.PI + 0.3, _([0.2,0.1,Math.PI]).sum(), "Math.PI" );
+  equal( 14.2, _([0,14,0.2]).sum(), "Zero" );
+});
+
+test("Objects", function() {
+  expect(3);
+  equal( _([{value:1},{value:2},{value:3}]).sum(), 6, "Array of objects" );
+  equal( _([{a:1},{a:2, b:5},{a:3}]).sum('a'), 6, "Specify plucked key" );
+  equal( _({one: {a:1},two:{a:2},three: {a:3}}).sum('a'),6,  "Over values of an object with specified key" );
+});
+
+module("Mean");
+
+test("Arrays", function() {
+  expect(2);
+  equal( _([0,0.5,1]).mean(), 0.5, "Easy" );
+  equal( _([0,1,2]).mean(), 1, "Another easy one" );
+});
+
+test("Objects", function() {
+  expect(2);
+  equal( _([{a:-Math.PI},{a:Math.PI}]).mean('a'), 0, "Array of objects, specified key" );
+  equal( _({one: {a:-Math.PI}, two: {a:1}}).mean('a'), (1-Math.PI)/2, "OVer values of an object with specified key" );
+});
+
+module("Numeric Sort");
+
+test("Arrays", function() {
+  expect(1);
+  deepEqual( _([0,4,7,-1]).sort(), [-1,0,4,7], "Digits, negative, zero" );
+});
+
+  });
+  </script>
+  
+</head>
+<body>
+  <h1 id="qunit-header">QUnit example</h1>
+ <h2 id="qunit-banner"></h2>
+ <div id="qunit-testrunner-toolbar"></div>
+ <h2 id="qunit-userAgent"></h2>
+ <ol id="qunit-tests"></ol>
+ <div id="qunit-fixture">test markup, will be hidden</div>
+</body>
+</html>
