@@ -57,6 +57,16 @@ test("Arrays", function() {
   deepEqual( _([0,4,7,-1]).sort(), [-1,0,4,7], "Digits, negative, zero" );
 });
 
+module("Slope");
+
+test("Two points", function() {
+  expect(4);
+  equal( _([0,0]).slope([5,5]), 1, "Slope of 1" );
+  equal( _([0,0]).slope([1,10]), 10, "Slope of 10" );
+  equal( _([0,0]).slope([0,10]), Infinity, "Infinite slope" );
+  equal( _([0,0]).slope([10,0]), 0, "Slope of 0" );
+});
+
   });
   </script>
   
