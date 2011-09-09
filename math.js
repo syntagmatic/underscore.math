@@ -4,29 +4,30 @@
 
   var math = this.math = {};
 
-  // Sum of array
-  // math.sum([1,2,3])
-  //   => 6
-  // math.sum([{b: 4},{b: 5},{b: 6}], 'b')
-  //   => 15
-  math.sum = function(obj, key) {
-    if (_.isArray(obj) && typeof obj[0] === 'number') {
-      var arr = obj;
-    } else {
-      var key = key || 'value';
-      var arr = _(obj).pluck(key);
-    }
-    var val = 0;
-    for (var i=0, len = arr.length; i<len; i++)
-      val += arr[i];
-    return val;
-  };
-
   // Arithmetic mean
   // math.mean([1,2,3])
   //   => 2
-  math.mean = function(obj, key) {
+  math.mean = math.ave = math.average = function(obj, key) {
     return math.sum(obj, key) / _(obj).size();
+  };
+
+  // math.median([1,2,3,4])
+  //   => 2.5
+  //   TODO {}, [{}]
+  math.median = function(arr) {
+    var middle = (arr.length + 1) /2;
+    var sorted = math.sort(arr);
+    return (sorted.length % 2) ? sorted[middle - 1] : (sorted[middle - 1.5] + sorted[middle - 0.5]) / 2;
+  };
+
+  // Power, exponent
+  // math.pow(2,3)
+  //   => 8
+  math.pow = function(x, n) {
+     if (_.isNumber(x))
+        return Math.pow(x, n);
+     if (_.isArray(x))
+        return _.map(x, function(i) { return _.pow(i,n); });
   };
 
   // Scale to max value
@@ -53,27 +54,29 @@
       return a - b;
     });
   };
-  
-  // math.median([1,2,3,4])
-  //   => 2.5
-  //   TODO Objects
-  math.median = function(arr) {
-    var middle = (arr.length + 1) /2;
-    var sorted = math.sort(arr);
-    return (sorted.length % 2) ? sorted[middle - 1] : (sorted[middle - 1.5] + sorted[middle - 0.5]) / 2;
+
+   // math.stdDeviation([1,2,3])
+  //   => 0.816496580927726
+  math.stdDeviation = math.sigma = function(arr) {
+    return Math.sqrt(_(arr).variance());
   };
 
-  // math.variance([1,2,3])
-  //   => TODO
-  math.variance = function(arr) {
-    var mean = _(arr).mean();
-    return _(arr).chain().map(function(x) { return Math.pow((x-mean),2); }).mean().value();
-  };
-  
-  // math.stdDeviation([1,2,3])
-  //   => TODO
-  math.stdDeviation = function(arr) {
-    return Math.sqrt(_(arr).variance());
+  // Sum of array
+  // math.sum([1,2,3])
+  //   => 6
+  // math.sum([{b: 4},{b: 5},{b: 6}], 'b')
+  //   => 15
+  math.sum = function(obj, key) {
+    if (_.isArray(obj) && typeof obj[0] === 'number') {
+      var arr = obj;
+    } else {
+      var key = key || 'value';
+      var arr = _(obj).pluck(key);
+    }
+    var val = 0;
+    for (var i=0, len = arr.length; i<len; i++)
+      val += arr[i];
+    return val;
   };
 
   // math.transpose(([1,2,3], [4,5,6], [7,8,9]])
@@ -88,8 +91,14 @@
     });
     return trans;
   };
-
-
+ 
+  // math.variance([1,2,3])
+  //   => 2/3
+  math.variance = function(arr) {
+    var mean = _(arr).mean();
+    return _(arr).chain().map(function(x) { return _(x-mean).pow(2); }).mean().value();
+  };
+  
   _.mixin(math);
 
 })();

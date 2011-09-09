@@ -103,6 +103,19 @@ test("Arrays", function() {
                 [3,6,9]],
                "Tranpose 3x3" );
 });
+
+module("Power (Exponent)");
+test("Numbers", function() {
+  expect(2);
+  equal( _(2).pow(5), 32, "2^5 = 32");
+  equal( _(0.5).pow(2), 0.25, "0.5^2 = 0.25");
+});
+
+test("Arrays", function() {
+  expect(1);
+  deepEqual( _([2,3,4]).pow(2), [4,9,16], "[2,3,4] -> [4,9,16]");
+});
+
   });
   </script>
   
