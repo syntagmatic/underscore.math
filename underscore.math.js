@@ -99,6 +99,19 @@
     return _(arr).chain().map(function(x) { return _(x-mean).pow(2); }).mean().value();
   };
   
+  // math.movingAvg([1,2,3,4,5], 3);
+  //   => [2,3,4]
+  math.movingAvg = function(arr, size) {
+    var win, i, newarr = [];
+    for(i = size-1; i <= arr.length; i++) {
+      win = arr.slice(i-size, i);
+      if (win.length === size) {
+        newarr.push(_.mean(win)); 
+      }
+    }
+    return newarr;
+  };
+  
   _.mixin(math);
 
 })();
