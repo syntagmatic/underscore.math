@@ -1,4 +1,8 @@
-//   Math.js
+//     Underscore.math.js 0.1
+//     (c) 2012 Kai Chang
+//     Underscore.math is freely distributable under the MIT license.
+//     Portions of Underscore.math are inspired or borrowed from MooTools Array.Math,
+//     http://github.com/syntagmatic/underscore.math
 
 (function() {
 
