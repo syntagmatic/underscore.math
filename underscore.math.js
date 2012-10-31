@@ -19,6 +19,7 @@
   //   => 2.5
   //   TODO {}, [{}]
   math.median = function(arr) {
+    var arr = arr.slice(0); // create copy
     var middle = (arr.length + 1) /2;
     var sorted = math.sort(arr);
     return (sorted.length % 2) ? sorted[middle - 1] : (sorted[middle - 1.5] + sorted[middle - 0.5]) / 2;
@@ -54,9 +55,7 @@
   // math.sort([3,1,2])
   //   => [1,2,3]
   math.sort = function(arr) {
-    return arr.sort(function(a, b){
-      return a - b;
-    });
+    return _(arr).sortBy(_.identity);
   };
 
    // math.stdDeviation([1,2,3])

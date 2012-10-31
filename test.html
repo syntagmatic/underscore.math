@@ -70,11 +70,15 @@ test("Two points", function() {
 module("Median");
 
 test("Arrays", function() {
-  expect(4);
+  expect(5);
   equal( _([0,0,0,0,5]).median(), 0, "Median of 0" );
   equal( _([0,0,1,2,5]).median(), 1, "Median of 5 numbers" );
   equal( _([0,0,1,2]).median(), 0.5, "(0 + 1)/2" );
   equal( _([0,0,1,2,3,4]).median(), 1.5, "(1 + 2)/2" );
+
+  var no_mutate = [4,3,2,1];
+  _(no_mutate).median();
+  deepEqual(no_mutate, [4,3,2,1], "Original array not mutated" );
 });
 
 module("Variance");
