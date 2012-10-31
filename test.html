@@ -53,8 +53,9 @@ test("Arrays", function() {
 module("Numeric Sort");
 
 test("Arrays", function() {
-  expect(1);
+  expect(2);
   deepEqual( _([0,4,7,-1]).sort(), [-1,0,4,7], "Digits, negative, zero" );
+  deepEqual( _([0,4,7,-1,12,21,122]).sort(), [-1,0,4,7,12,21,122], "Double digits" );
 });
 
 module("Slope");
