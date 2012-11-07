@@ -1,8 +1,11 @@
-//     Underscore.math.js 0.1.1
+//     Underscore.math.js 0.1.2
 //     (c) 2012 Kai Chang
 //     Underscore.math is freely distributable under the MIT license.
 //     Portions of Underscore.math are inspired or borrowed from MooTools Array.Math,
 //     http://github.com/syntagmatic/underscore.math
+//     
+//     Requires Underscore.js
+//     http://underscorejs.org/
 
 (function() {
 
@@ -99,9 +102,28 @@
   //   => 2/3
   math.variance = function(arr) {
     var mean = _(arr).mean();
-    return _(arr).chain().map(function(x) { return _(x-mean).pow(2); }).mean().value();
+    var variance = function(x) { return _(x-mean).pow(2); };
+    return _(arr).chain().map(variance).mean().value();
   };
   
+  // Standard score, assuming normal distribution
+  // math.zscore([1,2,3])
+  //   => [-1.224744871391589, 0, 1.224744871391589]
+  math.zscore = function(obj, key) {
+    if (_.isArray(obj) && typeof obj[0] === 'number') {
+      var arr = obj;
+    } else {
+      var key = key || 'value';
+      var arr = _(obj).pluck(key);
+    }
+
+    var n = arr.length,
+        mean = _(arr).mean(),
+        sigma = _(arr).stdDeviation();
+    var zscore = function(d) { return (d-mean)/sigma; };
+    return _(arr).map(zscore);
+  };
+
   // math.movingAvg([1,2,3,4,5], 3);
   //   => [2,3,4]
   math.movingAvg = function(arr, size) {
@@ -115,6 +137,7 @@
     return newarr;
   };
   
+  // add methods to Underscore.js namespace
   _.mixin(math);
 
 })();

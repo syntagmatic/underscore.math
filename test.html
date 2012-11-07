@@ -96,6 +96,18 @@ test("Arrays", function() {
   equal( _([1,2,3]).stdDeviation(), Math.sqrt(2/3), "Variance of [1,2,3]" );
 });
 
+module("Z Score");
+
+test("Arrays", function() {
+  expect(1);
+  deepEqual( _([1,2,3]).chain().zscore().map(function(d) { return d.toPrecision(4); }).value(), ["-1.225", "0.000", "1.225"], "Z Score of [1,2,3]" );
+});
+
+test("Objects", function() {
+  expect(1);
+  deepEqual( _([{a: 1},{a: 2},{a: 3}]).chain().zscore('a').map(function(d) { return d.toPrecision(4); }).value(), ["-1.225", "0.000", "1.225"], "Z Score of [1,2,3]" );
+});
+
 module("Transpose");
 
 test("Arrays", function() {
